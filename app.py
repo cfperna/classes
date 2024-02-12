@@ -15,3 +15,6 @@ class Product:
 
 product = Product(10)
 print(product.price)
+product2 = Product(20)
+print(product2.price)
+
