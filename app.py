@@ -2,37 +2,30 @@
 from abc import ABC, abstractmethod
 
 
-class RaiseOperationError(Exception):
-    pass
-
-
-class Stream (ABC):
-    def __init__(self) -> None:
-        self.opened = False
-
-    def open(self):
-        if self.opened:
-            raise RaiseOperationError('File is already open')
-        self.opened = True
-        print('open')
-
-    def close(self):
-        if not self.open:
-            raise RaiseOperationError('File is already closed')
-        self.opened = False
-
+class UIcontrol(ABC):
 
     @abstractmethod
-    def Read(self):
-        print('Reading data from memory stream')
+    def draw(self):
+        pass
 
 
-class MemoryStream(Stream):
-    def Read(self):
-        print("reading data from Memory")
+class TextBox(UIcontrol):
+    def draw(self):
+        print("Text Box")
 
 
-m = MemoryStream()
-m.Read()
-m.open()
+class DropDownList(UIcontrol):
+    def draw(self):
+        print('DropdownList')
 
+
+def draw(controls):
+    for control in controls:
+        control.draw()
+
+
+ddl = DropDownList()
+tb = TextBox()
+
+
+draw([ddl, tb])
