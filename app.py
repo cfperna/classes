@@ -1,34 +1,38 @@
 
+from abc import ABC, abstractmethod
+
 
 class RaiseOperationError(Exception):
     pass
 
 
-class Stream:
+class Stream (ABC):
     def __init__(self) -> None:
         self.opened = False
 
     def open(self):
         if self.opened:
             raise RaiseOperationError('File is already open')
-        self.open = True
+        self.opened = True
+        print('open')
 
     def close(self):
         if not self.open:
             raise RaiseOperationError('File is already closed')
-        self.open = False
+        self.opened = False
 
 
-class FileStream(Stream):
+    @abstractmethod
     def Read(self):
-        print('Reading for file')
+        print('Reading data from memory stream')
 
 
-class NetworkStream(Stream):
+class MemoryStream(Stream):
     def Read(self):
-        print('Reading data for Network')
+        print("reading data from Memory")
 
 
-n = NetworkStream()
+m = MemoryStream()
+m.Read()
+m.open()
 
-n.Read()
